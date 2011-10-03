@@ -6,6 +6,10 @@
   float: left;
 }
 
+#stripe-admin-test #edit-amount {
+  text-align: right;
+}
+
 #stripe-admin-keys .form-item {
   display: inline;
 }

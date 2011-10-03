@@ -94,7 +94,7 @@ function stripe_admin_test() {
 */
   $form['card_number'] = array(
     '#type' => 'textfield',
-    '#title' => t('Card Number'),
+    '#title' => t('Card Number:'),
     '#size' => 20,
     '#default_value' => '4242424242424242',
     '#attributes' => array(
@@ -105,7 +105,7 @@ function stripe_admin_test() {
 
   $form['card_cvc'] = array(
     '#type' => 'textfield',
-    '#title' => t('CVC'),
+    '#title' => t('CVC:'),
     '#size' => 4,
     '#default_value' => '123',
     '#attributes' => array(
@@ -116,7 +116,7 @@ function stripe_admin_test() {
 
   $form['card_expiry_month'] = array(
     '#type' => 'textfield',
-    '#title' => t('Expiration (MM/YYYY)'),
+    '#title' => t('Expiration (MM/YYYY):'),
     '#size' => 2,
     '#default_value' => '10',
     '#attributes' => array(
@@ -134,12 +134,13 @@ function stripe_admin_test() {
     ),
   );
 
-  $form['card_submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Submit Payment'),
-    '#attributes' => array(
-      'class' => array('submit-button'),
-    ),
+  $form['amount'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Amount:'),
+    '#prefix' => '<div class="container-inline form-item">',
+    '#suffix' => '<em>cents</em></div>',
+    '#default_value' => 99,
+    '#size' => 6,
   );
 
   // Attach a little custom css.
@@ -151,6 +152,15 @@ function stripe_admin_test() {
   $active_key_name = variable_get('stripe_active_key', '');
   $active_key = variable_get('stripe_' . $active_key_name, '');
   if ($active_key !== '') {
+    // Add the submit button. Can't submit without a key.
+    $form['card_submit'] = array(
+      '#type' => 'submit',
+      '#value' => t('Submit Payment'),
+      '#attributes' => array(
+        'class' => array('submit-button'),
+      ),
+    );
+
     // Attach the javascript from Stripe.
     $form['#attached']['js'] = array(
       'https://js.stripe.com/v1/' => array(
