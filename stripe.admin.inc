@@ -141,6 +141,9 @@ function stripe_admin_test() {
     '#suffix' => '<em>cents</em></div>',
     '#default_value' => 99,
     '#size' => 6,
+    '#attributes' => array(
+      'class' => array('amount'),
+    ),
   );
 
   // Attach a little custom css.
@@ -166,6 +169,8 @@ function stripe_admin_test() {
       'https://js.stripe.com/v1/' => array(
         'type' => 'external',
       ),
+      drupal_get_path('module', 'stripe') . '/stripe.js',
+      // And set our key.
       'jQuery(document).ready(function () { Stripe.setPublishableKey("' . $active_key . '"); });' => array(
         'type' => 'inline', 'scope' => 'footer', 'weight' => 5
       ),
