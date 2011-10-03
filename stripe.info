@@ -4,3 +4,5 @@ package = Commerce
 version = VERSION
 core = 7.x
 files[] = stripe.module
+files[] = stripe.admin.inc
+configure = admin/config/stripe

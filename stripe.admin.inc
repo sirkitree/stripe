@@ -6,31 +6,9 @@
  */
 
 /**
- * Menu callback: present a list of links to the various things you can do with
- * this module.
- */
-function stripe_admin_menu() {
-  $items = array(
-    'type' => 'dl',
-    'title' => t('Menu'),
-    'items' => array(
-      l('Configure', 'admin/config/stripe') . theme('item_list', array(
-        'type' => 'dd',
-        'items' => array(t('Add your API keys.')),
-      )),
-      l('Test form', 'admin/stripe/test') . theme('item_list', array(
-        'type' => 'dd',
-        'items' => array(t('Test responses from Stripe')),
-      )),
-    ),
-  );
-  return theme('item_list', $items);
-}
-
-/**
  * Menu callback: configure Stripe API Keys
  */
-function stripe_admin_config() {
+function stripe_admin_keys() {
   $form['API_Keys'] = array(
     '#type' => 'fieldset',
     '#title' => t('API Keys'),
