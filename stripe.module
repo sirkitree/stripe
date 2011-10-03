@@ -18,7 +18,7 @@ function stripe_help($path, $arg) {
     return $output;
   }
   if ($path == 'admin/config/stripe/test') {
-    return '<p>' . t('This form is to test responses from Stripe. The default values are accepted by Stripe for testing purposes. Before you can use this form, you should <a href="@url">designate an active API Key</a>.', array('@url' => '/admin/config/stripe')) . '</p>';
+    return '<p>' . t('This form is to test responses from Stripe. The default values are accepted by Stripe for testing purposes. Before you can use this form, you should <a href="@url">designate an active API Key</a>.', array('@url' => '/admin/config/stripe/keys')) . '</p>';
   }
 }
 
