@@ -1,0 +1,66 @@
+<?php
+
+/**
+ * @file stripe.module
+ * Drupal hooks used for integrating the Stripe service.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function stripe_help($path, $arg) {
+  if ($path == 'admin/stripe/test') {
+    return '<p>' . t('This form is to test responses from Stripe. The default values are accepted by Stripe for testing purposes.') . '</p>';
+  }
+  if ($path == 'admin/config/stripe') {
+    $output = '<ol><li>' . t('Enter the API keys you get from your <a href="@url">Stripe account page</a>.', array('@url' => 'https://manage.stripe.com/account')) . '</li>';
+    $output .= '<li>' . t('Use the radio buttons to choose which API Key should be used with this site.') . '</li></ol>';
+    return $output;
+  }
+}
+
+/**
+ * Implements hook_theme().
+
+function stripe_theme() {
+
+}
+
+/**
+ * Implements hook_menu().
+ */
+function stripe_menu() {
+  $items['admin/stripe'] = array(
+    'title' => 'Stripe',
+    'description' => 'List of what the stripe module offers.',
+    'page callback' => 'stripe_admin_menu',
+    'access arguments' => array('access stripe overview'),
+    'weight' => -10,
+    'file' => 'stripe.admin.inc',
+  );
+  $items['admin/stripe/list'] = array(
+    'title' => 'Stripe',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -10,
+  );
+
+  $items['admin/stripe/test'] = array(
+    'title' => 'Stripe test form',
+    'description' => 'A form for testing Stripe responses.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('stripe_admin_test'),
+    'access arguments' => array('administer stripe'),
+    'file' => 'stripe.admin.inc',
+  );
+
+  $items['admin/config/stripe'] = array(
+    'title' => 'Configure Stripe',
+    'description' => 'Enter API Keys and set which one should be active.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('stripe_admin_config'),
+    'access arguments' => array('administer stripe'),
+    'file' => 'stripe.admin.inc',
+  );
+
+  return $items;
+}

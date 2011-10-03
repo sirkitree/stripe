@@ -1,0 +1,6 @@
+name = Stripe
+description = Integration with the stripe service. https://stripe.com/
+package = Commerce
+version = VERSION
+core = 7.x
+files[] = stripe.module
